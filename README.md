@@ -14,8 +14,22 @@ O servidor usa `http://localhost:3000` quando a porta está disponível.
 ```sh
 npm run lint
 npm run build
-npm start
 ```
+
+## Publicação no Render
+
+O projeto usa exportação estática. `npm run build` gera a pasta `out` com o HTML, CSS, JavaScript, fontes, imagens e vídeo. As imagens são servidas diretamente, sem depender do otimizador de um servidor Next.js.
+
+Crie um **Static Site** no Render com estas configurações:
+
+- Branch: `main`
+- Root Directory: deixe vazio (o projeto está na raiz do repositório).
+- Build Command: `npm ci && npm run build`
+- Publish Directory: `out`
+
+O comando de build pertence ao campo **Build Command**; **Publish Directory** recebe apenas o nome da pasta `out`. Não é necessário Start Command nem variáveis de ambiente para a versão atual.
+
+O conteúdo gerado em `out` é ignorado pelo Git e reconstruído pelo Render a cada deploy. Para desenvolvimento local, continue usando `npm run dev`; `next start` não se aplica à exportação estática.
 
 ## Estrutura
 
